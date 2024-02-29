@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>The Dictionary</title>
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css2?family=Dhurjati&family=Teko&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dhurjati&family=Sacramento&family=Teko&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Salsa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Salsa&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+.content
+{
+	background-color: ghostwhite;
+}
+		.top{
+			height:80px;
+			width: 100%;
+			background-color: skyblue;
+			border: 2px solid;
+		
+			border-color: skyblue;
+			border-bottom-left-radius:20% ;
+
+		}
+
+a{
+	text-decoration: none;
+	position: absolute;
+	top: 30px;
+	left: 35px;
+}
+.content
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 500px;
+	width: 400px;
+	background-color: ghostwhite;
+	border: 2px solid;
+	position: absolute;
+	left: 480px;
+	border-color: whitesmoke;
+}
+.st
+{
+	position: absolute;
+	top: 80px;
+}
+h1,h3{
+	 font-family: 'Pacifico', cursive;
+font-family: 'Salsa', cursive;
+;
+}
+input
+{
+	padding: 3%;
+	border: 2px double;
+}
+.lty
+{
+	border: 2px solid;
+	border-radius: 10%;
+	padding: 5%;
+	border-color: white;
+}
+button
+{
+	position: absolute;
+	padding: 2%;
+		 font-family: 'Pacifico', cursive;
+font-family: 'Salsa', cursive;
+}
+
+@media screen and (max-width:700px)
+{
+	.content
+{
+	background-color: ghostwhite;
+}
+		.top{
+			height:80px;
+			width: 100%;
+			background-color: skyblue;
+			border: 2px solid;
+		
+			border-color: skyblue;
+			border-bottom-left-radius:20% ;
+
+		}
+
+a{
+	text-decoration: none;
+	position: absolute;
+	top: 30px;
+	left: 35px;
+}
+.content
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 80px;
+	width: 100%;
+	background-color: ghostwhite;
+	border: 2px solid;
+	border-color: whitesmoke;
+}
+.st
+{
+	position: absolute;
+	top: 80px;
+}
+h1,h3{
+	 font-family: 'Pacifico', cursive;
+font-family: 'Salsa', cursive;
+;
+}
+input
+{
+	padding: 3%;
+	border: 2px double;
+}
+.lty
+{
+	border: 2px solid;
+	border-radius: 10%;
+	padding: 5%;
+	border-color: white;
+}
+button
+{
+	position: absolute;
+	padding: 2%;
+		 font-family: 'Pacifico', cursive;
+font-family: 'Salsa', cursive;
+}
+
+
+}
+
+
+
+	</style>
+</head>
+<body>
+	<div class="top">
+		<a href="index.html"><h1>The Dictionary</h1></a>
+		</div>
+		<div class="content">
+			<div class="st">
+				<h3><label>What word do you want to look up?</label><br></h3>
+				<div class="lty">
+					 <input type="searchbox" name="word" id="word" placeholder="Search for the Word "><button onclick="run()" >find</button>
+
+				</div>
+				<div>
+					<h3 id="dict"></h3>
+					<h3 id="part"></h3>
+					<h3 ><p id="def"></p></h3>
+					<h3 ><p id="exa"></p></h3>
+					
+
+
+				</div>
+				
+       			
+
+
+
+
+			</div>
+			
+		</div>
+
+		<script type="text/javascript">
+			
+
+		
+
+			async function run() {
+				const a = document.getElementById('word').value;
+		        const b = a.length;
+		    	if (b>1)
+		    	 {
+		    	 	const word = `https://api.dictionaryapi.dev/api/v2/entries/en/${a}`
+				const data = await fetch(word);
+				var dict = await data.json();
+				document.getElementById('dict').innerHTML = 'Word:'+ a;
+
+				const c = dict[0].meanings.length;
+
+				switch(c)
+				{
+					
+				case 1:
+					document.getElementById('part').innerHTML = 'Part of Speech : '+dict[0].meanings[0].partOfSpeech ;
+	document.getElementById('def').innerHTML = 'Definition:'+ dict[0].meanings[0].definitions[0].definition;
+					break;
+
+				case 2:
+					document.getElementById('part').innerHTML = 'Part of Speech : '+dict[0].meanings[0].partOfSpeech  +','+ dict[0].meanings[1].partOfSpeech ;
+					document.getElementById('def').innerHTML = 'Definition:'+ dict[0].meanings[0].definitions[0].definition+','+dict[0].meanings[1].definitions[1].definition;
+
+				case 3:
+					document.getElementById('part').innerHTML = 'Part of Speech : '+dict[0].meanings[0].partOfSpeech  +','+ dict[0].meanings[1].partOfSpeech  +','+ dict[0].meanings[2].partOfSpeech;
+	document.getElementById('def').innerHTML = 'Definition:'+ dict[0].meanings[0].definitions[0].definition+','+dict[0].meanings[1].definitions[0].definition +','+dict[0].meanings[2].definitions[0].definition;
+
+				case 4:
+					document.getElementById('part').innerHTML = 'Part of Speech : '+dict[0].meanings[0].partOfSpeech  +','+ dict[0].meanings[1].partOfSpeech  +','+ dict[0].meanings[2].partOfSpeech +','+ dict[0].meanings[3].partOfSpeech;
+
+					document.getElementById('def').innerHTML = 'Definition:'+ dict[0].meanings[0].definitions[0].definition+','+dict[0].meanings[1].definitions[0].definition +','+dict[0].meanings[2].definitions[0].definition +','+dict[0].meanings[3].definitions[0].definition;
+
+				case 5:
+					document.getElementById('part').innerHTML = 'Part of Speech : '+dict[0].meanings[0].partOfSpeech  +','+ dict[0].meanings[1].partOfSpeech  +','+ dict[0].meanings[2].partOfSpeech +','+ dict[0].meanings[3].partOfSpeech +','+ dict[0].meanings[3].partOfSpeech;
+
+					document.getElementById('def').innerHTML = 'Definition:'+ dict[0].meanings[0].definitions[0].definition+','+dict[0].meanings[1].definitions[0].definition +','+dict[0].meanings[2].definitions[0].definition +','+dict[0].meanings[3].definitions[0].definition +','+dict[0].meanings[4].definitions[0].definition;
+
+
+
+
+
+				   }
+				
+
+
+		    	 }
+		    	 else
+		    	 {
+		    	 	alert("please Enter an Word");
+		    	 }
+		    	
+
+				
+			    
+
+				
+			}
+
+			
+       
+    	
+			
+		</script>
+
+</body>
+</html>
